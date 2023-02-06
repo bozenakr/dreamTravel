@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
-use App\Http\Requests\StoreHotelRequest;
-use App\Http\Requests\UpdateHotelRequest;
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
 {
@@ -31,10 +31,10 @@ class HotelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreHotelRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreHotelRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -64,11 +64,11 @@ class HotelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateHotelRequest  $request
+     * @param  \App\Http\Requests\Request  $request
      * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateHotelRequest $request, Hotel $hotel)
+    public function update(Request $request, Hotel $hotel)
     {
         //
     }
