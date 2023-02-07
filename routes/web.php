@@ -29,23 +29,23 @@ Route::post('/add-to-cart', [F::class, 'addToCart'])->name('add-to-cart');
 
 
 Route::prefix('admin/countries')->name('countries-')->group(function () {
-    Route::get('/', [C::class, 'index'])->name('index')->middleware('roles:A|M');
-    Route::get('/create', [C::class, 'create'])->name('create')->middleware('roles:A');
-    Route::post('/create', [C::class, 'store'])->name('store')->middleware('roles:A');
-    Route::get('/edit/{country}', [C::class, 'edit'])->name('edit')->middleware('roles:A');
-    Route::put('/edit/{country}', [C::class, 'update'])->name('update')->middleware('roles:A');
-    Route::delete('/delete/{country}', [C::class, 'destroy'])->name('delete')->middleware('roles:A');
+    Route::get('/', [C::class, 'index'])->name('index');
+    Route::get('/create', [C::class, 'create'])->name('create');
+    Route::post('/create', [C::class, 'store'])->name('store');
+    Route::get('/edit/{country}', [C::class, 'edit'])->name('edit');
+    Route::put('/edit/{country}', [C::class, 'update'])->name('update');
+    Route::delete('/delete/{country}', [C::class, 'destroy'])->name('delete');
 });
 
 Route::prefix('admin/hotels')->name('hotels-')->group(function () {
-    Route::get('/', [H::class, 'index'])->name('index')->middleware('roles:A|M');
-    Route::get('/show/{hotel}', [H::class, 'show'])->name('show')->middleware('roles:A|M');
-    Route::get('/pdf/{hotel}', [H::class, 'pdf'])->name('pdf')->middleware('roles:A|M');
+    Route::get('/', [H::class, 'index'])->name('index');
+    Route::get('/show/{hotel}', [H::class, 'show'])->name('show');
+    Route::get('/pdf/{hotel}', [H::class, 'pdf'])->name('pdf');
     Route::get('/create', [H::class, 'create'])->name('create');
     Route::post('/create', [H::class, 'store'])->name('store');
-    Route::get('/edit/{hotel}', [H::class, 'edit'])->name('edit')->middleware('roles:A|M');
-    Route::put('/edit/{hotel}', [H::class, 'update'])->name('update')->middleware('roles:A|M');
-    Route::delete('/delete/{hotel}', [H::class, 'destroy'])->name('delete')->middleware('roles:A');
+    Route::get('/edit/{hotel}', [H::class, 'edit'])->name('edit');
+    Route::put('/edit/{hotel}', [H::class, 'update'])->name('update');
+    Route::delete('/delete/{hotel}', [H::class, 'destroy'])->name('delete');
 });
 
 

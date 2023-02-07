@@ -15,7 +15,10 @@ class CountryController extends Controller
      */
     public function index()
     {
-        //
+        $hotels = Country::all()->sortBy('title');
+        return view('back.hotels.index', [
+            'hotels' => $hotels
+        ]);
     }
 
     /**
@@ -25,7 +28,7 @@ class CountryController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.countries.create');
     }
 
     /**
@@ -36,7 +39,13 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $country = new Country;
+        $country->title = $request->country_title;
+        $country->season_start = $request->season_start;
+        $country->season_end = $request->season_end;
+        $country->save();
+
+        return redirect()->route('countries-index')->with('ok', 'New type was created');
     }
 
     /**
@@ -58,7 +67,9 @@ class CountryController extends Controller
      */
     public function edit(Country $country)
     {
-        //
+        return view('back.countries.edit',[
+            'country' => $country
+        ]);
     }
 
     /**
@@ -70,7 +81,12 @@ class CountryController extends Controller
      */
     public function update(Request $request, Country $country)
     {
-        //
+        $country->title = $request->country_title;
+        $country->season_start = $request->season_start;
+        $country->season_end = $request->season_end;
+        $country->save();
+
+        return redirect()->route('countries-index')->with('ok', 'Type was edited');
     }
 
     /**
@@ -81,6 +97,10 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        //
+        if (!$country->typeDrinks()->count()) {
+            $country->delete();
+            return redirect()->route('countries-index')->with('ok', 'Type was deleted');
+        }
+        return redirect()->back()->with('no', 'Type has drinks.');
     }
 }
