@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->decimal('price', 10, 2)->unsigned();
-            $table->integer('time')->unsigned();
+            $table->integer('days')->unsigned();
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->string('photo', 200)->nullable();
