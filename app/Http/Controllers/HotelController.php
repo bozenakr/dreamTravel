@@ -78,7 +78,7 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        // $countries = Country::all();
+        $countries = Country::all();
         return view('back.hotels.edit', [
             'hotel' => $hotel,
             'countries' => $countries
@@ -114,7 +114,7 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        $customer->delete(); 
-        return redirect()->route('customers-index')->with('ok', 'Hotel successfully deleted');
+        $hotel->delete(); 
+        return redirect()->route('hotels-index')->with('ok', 'Hotel successfully deleted');
     }
 }

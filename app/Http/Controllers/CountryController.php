@@ -15,9 +15,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $hotels = Country::all()->sortBy('title');
-        return view('back.hotels.index', [
-            'hotels' => $hotels
+        $countries = Country::all()->sortBy('title');
+        return view('back.countries.index', [
+            'countries' => $countries
         ]);
     }
 
@@ -97,10 +97,10 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
-        if (!$country->typeDrinks()->count()) {
+        if (!$country->countryHotels()->count()) {
             $country->delete();
             return redirect()->route('countries-index')->with('ok', 'Type was deleted');
         }
-        return redirect()->back()->with('no', 'Type has drinks.');
+        return redirect()->back()->with('no', 'Can not delete country, it has hotels.');
     }
 }
