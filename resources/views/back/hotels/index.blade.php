@@ -16,6 +16,9 @@
                         <li class="list-group-item">
                             <div class="list-table">
                                 <div class="d-flex">
+                                    @if($hotel->photo)
+                                    <img class="small-img" src="{{asset($hotel->photo)}}">
+                                    @endif
                                     <h5 class="m-2">{{$hotel->title}}</h5>
                                     <div class="m-2">{{$hotel->hotelCountry->title}}</div>
                                     <div class="m-2">{{$hotel->days}}</div>

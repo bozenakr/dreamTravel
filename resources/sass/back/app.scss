@@ -10,6 +10,18 @@
 @import './deposit-withdraw.scss';
 @import './new-account.scss';
 
+.small-img {
+    width: 10%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.fit-img {
+    width: 70%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
 :root {
     --blue-bg: #b3ecfc;
     --blue-light-bg: #dbf6fd;
@@ -20,6 +32,7 @@
     --blue-logout: #007fb6;
     --red: rgb(223, 117, 84);
 }
+
 
 body,
 body * {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Hotel;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 // use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
@@ -56,11 +57,10 @@ class HotelController extends Controller
 
             // $image = $manager->make($photo);
             // $image->crop(400, 600);
-            // $image->save(public_path().'/drinks/'.$file);
+            // $image->save(public_path().'/hotels/'.$file);
             
 
             $photo->move(public_path().'/hotels', $file);
-
             $hotel->photo = '/hotels/' . $file;
 
         }
@@ -96,7 +96,7 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        $countries = Country::all();
+        $countries = Country::all()->sortBy('title');
         return view('back.hotels.edit', [
             'hotel' => $hotel,
             'countries' => $countries
@@ -116,6 +116,28 @@ class HotelController extends Controller
         if ($request->delete_photo) {
             $hotel->deletePhoto();
             return redirect()->back()->with('ok', 'Photo was deleted');
+        }
+
+        if ($request->file('photo')) {
+            $photo = $request->file('photo');
+
+            $ext = $photo->getClientOriginalExtension();
+            $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+            $file = $name. '-' . rand(100000, 999999). '.' . $ext;
+            
+            // $manager = new ImageManager(['driver' => 'GD']);
+
+            // $image = $manager->make($photo);
+            // $image->crop(400, 600);
+            // $image->save(public_path().'/hotels/'.$file);
+            
+            if ($hotel->photo) {
+                $hotel->deletePhoto();
+            }
+            
+            $photo->move(public_path().'/hotels', $file);
+            $hotel->photo = '/hotels/' . $file;
+
         }
         
         $hotel->country_id = $request->country_id;
@@ -139,5 +161,11 @@ class HotelController extends Controller
     {
         $hotel->delete(); 
         return redirect()->route('hotels-index')->with('ok', 'Hotel successfully deleted');
+    }
+
+    public function pdf(hotel $hotel)
+    {
+        $pdf = Pdf::loadView('back.hotels.pdf', ['hotel' => $hotel]);
+        return $pdf->download($hotel->title.'.pdf');
     }
 }
