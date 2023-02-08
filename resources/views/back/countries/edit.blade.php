@@ -9,7 +9,7 @@
         <div class="col-12">
             <div class="card m-6">
                 <div class="card-header">
-                    <h2 style="justify-content: center; display: flex">Edit country</h2>
+                    <h2 style="justify-content: center; display: flex">Update country Information</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{route('countries-update', $country)}}" method="post">

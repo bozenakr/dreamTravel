@@ -9,7 +9,7 @@
         <div class="col-12">
             <div class="card m-6">
                 <div class="card-header">
-                    <h2 style="justify-content: center; display: flex">Edit hotel</h2>
+                    <h2 style="justify-content: center; display: flex">Update hotel Information</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{route('hotels-update', $hotel)}}" method="post" enctype="multipart/form-data">
@@ -38,7 +38,20 @@
                                 <label class="form-label">Hotel Photo</label>
                                 <input type="file" class="form-control" name="photo">
                             </div>
+
+                            @if($hotel->photo)
+                            <div class="col-4">
+                                <div class="mb-3 img">
+                                    <img src="{{asset($hotel->photo)}}">
+                                </div>
+                            </div>
+                            @endif
+
                         </div>
+                        @if($hotel->photo)
+                        <button type="submit" class="btn btn-outline-warning mt-4" name="delete_photo" value="1">Delete Photo</button>
+                        @endif
+
                         <div class="col-12">
                             <div class="mb-3">
                                 <label class="form-label">Hotel description</label>
@@ -47,6 +60,7 @@
                         </div>
                         <div class="mb-3" style="justify-content: center; display: flex">
                             <button type="submit" class="btn btn-outline-warning mt-4">Save</button>
+
                         </div>
                         @csrf
                         @method('put')

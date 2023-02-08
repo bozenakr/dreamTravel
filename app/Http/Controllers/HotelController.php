@@ -45,6 +45,26 @@ class HotelController extends Controller
     {
         $hotel = new Hotel;
 
+        if ($request->file('photo')) {
+            $photo = $request->file('photo');
+
+            $ext = $photo->getClientOriginalExtension();
+            $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+            $file = $name. '-' . rand(100000, 999999). '.' . $ext;
+            
+            // $manager = new ImageManager(['driver' => 'GD']);
+
+            // $image = $manager->make($photo);
+            // $image->crop(400, 600);
+            // $image->save(public_path().'/drinks/'.$file);
+            
+
+            $photo->move(public_path().'/hotels', $file);
+
+            $hotel->photo = '/hotels/' . $file;
+
+        }
+
         $hotel->country_id = $request->country_id;
         $hotel->title = $request->hotel_title;
         $hotel->days = $request->hotel_days;
@@ -65,9 +85,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        return view('back.hotels.show', [
-            'hotel' => $hotel
-        ]);
+        return view('back.hotels.show', ['hotel' => $hotel]);
     }
 
     /**
@@ -94,7 +112,12 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
-                        
+                   
+        if ($request->delete_photo) {
+            $hotel->deletePhoto();
+            return redirect()->back()->with('ok', 'Photo was deleted');
+        }
+        
         $hotel->country_id = $request->country_id;
         $hotel->title = $request->hotel_title;
         $hotel->days = $request->hotel_days;
@@ -103,7 +126,7 @@ class HotelController extends Controller
 
         $hotel->save();
         
-        return redirect()->route('hotels-index')->with('ok', 'Account succesfully edited');
+        return redirect()->route('hotels-index')->with('ok', 'Hotel succesfully edited');
     }
 
     /**
