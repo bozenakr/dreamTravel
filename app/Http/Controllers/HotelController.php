@@ -166,6 +166,6 @@ class HotelController extends Controller
     public function pdf(hotel $hotel)
     {
         $pdf = Pdf::loadView('back.hotels.pdf', ['hotel' => $hotel]);
-        return $pdf->download($hotel->title.'.pdf');
+        return $pdf->download('dreamTravel '.'-'.' '.$hotel->title.'.pdf');
     }
 }
