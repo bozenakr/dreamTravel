@@ -10,7 +10,6 @@
             <div class="card m-6">
                 <div class="card-header">
                     <h2 style="justify-content: center; display: flex">New hotel</h2>
-
                 </div>
                 <div class="card-body">
                     <form action="{{route('hotels-store')}}" method="post" enctype="multipart/form-data">

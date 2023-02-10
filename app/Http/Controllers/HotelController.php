@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Intervention\Image\ImageManager;
 // use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
@@ -54,11 +55,6 @@ class HotelController extends Controller
             $file = $name. '-' . rand(100000, 999999). '.' . $ext;
             
             // $manager = new ImageManager(['driver' => 'GD']);
-
-            // $image = $manager->make($photo);
-            // $image->crop(400, 600);
-            // $image->save(public_path().'/hotels/'.$file);
-            
 
             $photo->move(public_path().'/hotels', $file);
             $hotel->photo = '/hotels/' . $file;
@@ -125,19 +121,20 @@ class HotelController extends Controller
             $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $file = $name. '-' . rand(100000, 999999). '.' . $ext;
             
-            // $manager = new ImageManager(['driver' => 'GD']);
+            $manager = new ImageManager(['driver' => 'GD']);//sukuriu driveri
 
-            // $image = $manager->make($photo);
-            // $image->crop(400, 600);
-            // $image->save(public_path().'/hotels/'.$file);
+            $image = $manager->make($photo);
+            $image->resize(400, 300);
             
             if ($hotel->photo) {
                 $hotel->deletePhoto();
             }
             
-            $photo->move(public_path().'/hotels', $file);
-            $hotel->photo = '/hotels/' . $file;
-
+            // $photo->move(public_path().'/hotels', $file);
+        
+            $image->save(public_path().'/hotels/'.$file); //save i disc
+            $hotel->photo = '/hotels/' . $file; //save i db
+            
         }
         
         $hotel->country_id = $request->country_id;
