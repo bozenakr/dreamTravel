@@ -16,6 +16,7 @@ class FrontController extends Controller
             'hotels' => $hotels
         ]);
     }
+
     public function showCatHotels (Country $country)
     {
         $hotels = Hotel::where('country_id', $country->id)->paginate(9);
@@ -25,12 +26,19 @@ class FrontController extends Controller
         ]);
     }
 
-
-        public function showHotel (Hotel $hotel)
+    public function showHotel (Hotel $hotel)
     {
-        
         return view('front.hotel', [
             'hotel' => $hotel
         ]);
     }
+
+        public function addToCart(Request $request, CartService $cart)
+    {
+        $id = (int) $request->product;
+        $count = (int) $request->count;
+        $cart->add($id, $count);
+        return redirect()->back();
+    }
+
 }
