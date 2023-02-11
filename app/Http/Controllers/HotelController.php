@@ -54,10 +54,10 @@ class HotelController extends Controller
             $name = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
             $file = $name. '-' . rand(100000, 999999). '.' . $ext;
             
-            // $manager = new ImageManager(['driver' => 'GD']);
+            $manager = new ImageManager(['driver' => 'GD']);
 
-            $photo->move(public_path().'/hotels', $file);
-            $hotel->photo = '/hotels/' . $file;
+            $photo->move(public_path().'/hotels', $file);//save i disc
+            $hotel->photo = '/hotels/' . $file;//save i db
 
         }
 

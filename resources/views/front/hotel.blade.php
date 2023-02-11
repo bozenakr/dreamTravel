@@ -1,34 +1,31 @@
 @extends('layouts.front')
 
 @section('content')
-@section('title', 'Hotels')
+@section('title', 'Hotel details')
 
 <div class="container">
     <div class="row justify-content-center">
-        {{-- include categories --}}
-        <div class="col-3">
-            @include('front.common.categories')
-        </div>
+        {{-- <div class="col-3">
+            @include('front.common.cats')
+        </div> --}}
         <div class="col-9">
             <div class="card-body">
                 <div class="container">
                     <div class="row justify-content-center">
-                        @forelse($hotels as $hotel)
-                        <div class="col-4">
-                            <div class="list-table">
+                        <div class="col-12">
+                            <div class="list-table one">
                                 <div class="top">
                                     <h3>
                                         {{$hotel->title}}
                                     </h3>
-                                    {{-- link on photo --}}
-                                    <a href="{{route('show-hotel', $hotel)}}">
-                                        <div class="smallimg">
-                                            @if($hotel->photo)
-                                            <img src="{{asset($hotel->photo)}}">
-                                            @else
-                                            <img src="{{asset('no-img.png')}}">
-                                            @endif
-                                        </div>
+                                    {{-- <a href="{{route('show-hotel', $hotel)}}"> --}}
+                                    <div class="smallimg">
+                                        @if($hotel->photo)
+                                        <img src="{{asset($hotel->photo)}}">
+                                        @else
+                                        <img src="{{asset('no-img.png')}}">
+                                        @endif
+                                    </div>
                                     </a>
                                 </div>
                                 <div class="bottom">
@@ -48,13 +45,9 @@
                                 </div>
                             </div>
                         </div>
-                        @empty
-                        <div class="list-group-item">No hotels yet</div>
-                        @endforelse
                     </div>
                 </div>
             </div>
-            <div class="m-2">{{ $hotels->links()}}</div>
         </div>
     </div>
 </div>

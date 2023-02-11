@@ -22,9 +22,11 @@ use App\Http\Controllers\FrontController as F;
 // });
 
 
+//HomeController - redirect i homepage
+Route::get('/', [F::class, 'home'])->name('start');
 
-Route::get('/', [F::class, 'home'])->name('home');
 Route::get('/hotel/{hotel}', [F::class, 'showHotel'])->name('show-hotel');
+Route::get('/cat/{country}', [F::class, 'showCatHotels'])->name('show-cats-hotels');
 Route::post('/add-to-cart', [F::class, 'addToCart'])->name('add-to-cart');
 
 
@@ -49,9 +51,10 @@ Route::prefix('admin/hotels')->name('hotels-')->group(function () {
 });
 
 
-// Auth::routes();
+Auth::routes();
 
 //disable registration
-Auth::routes(['register' => false]);
+// Auth::routes(['register' => false]);
 
+//HomeController - redirect i psl welcome youre logged in
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

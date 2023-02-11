@@ -10,10 +10,27 @@ class FrontController extends Controller
 {
     public function home ()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::paginate(9);
         
         return view('front.home', [
             'hotels' => $hotels
-        ] );
+        ]);
+    }
+    public function showCatHotels (Country $country)
+    {
+        $hotels = Hotel::where('country_id', $country->id)->paginate(9);
+
+        return view('front.home', [
+            'hotels' => $hotels
+        ]);
+    }
+
+
+        public function showHotel (Hotel $hotel)
+    {
+        
+        return view('front.hotel', [
+            'hotel' => $hotel
+        ]);
     }
 }
