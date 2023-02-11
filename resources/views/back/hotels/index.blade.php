@@ -28,12 +28,16 @@
                                     <div class="d-flex">
                                         <a href="{{route('hotels-show', $hotel)}}" class="btn btn-outline-success">Show</a>
                                         <a href="{{route('hotels-edit', $hotel)}}" class="btn btn-outline-success">Edit</a>
+
+                                        {{-- delete rodomas tik admin --}}
+                                        @if(Auth::user()?->role == 'admin')
                                         <form action="{{route('hotels-delete', $hotel)}}" method="post">
                                             <button hotel="submit" class="btn btn-outline-danger">Delete</button>
                                     </div>
                                     @csrf
                                     @method('delete')
                                     </form>
+                                    @endif
                                 </div>
                             </div>
                         </li>

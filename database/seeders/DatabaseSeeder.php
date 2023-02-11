@@ -17,18 +17,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->insert([
-        //     'name' => 'Bebras',
-        //     'email' => 'bebras@gmail.com',
-        //     'password' => Hash::make('123'),
-        //     'role' => 'admin'
-        // ]);
-        // DB::table('users')->insert([
-        //     'name' => 'Briedis',
-        //     'email' => 'briedis@gmail.com',
-        //     'password' => Hash::make('123'),
-        //     'role' => 'manager'
-        // ]);
+        DB::table('users')->insert([
+            'name' => 'Bozena',
+            'email' => 'bozena@gmail.com',
+            'password' => Hash::make('123'),
+            'role' => 'admin'
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Bebras',
+            'email' => 'bebras@gmail.com',
+            'password' => Hash::make('123'),
+            'role' => 'manager'
+        ]);
 
         $faker = Faker::create();
 

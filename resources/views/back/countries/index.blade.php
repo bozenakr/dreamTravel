@@ -19,9 +19,13 @@
                                     <h5 class="m-2">{{$country->title}}</h5>
                                     <div class="m-2">{{$country->season_start}}</div>
                                     <div class="m-2">{{$country->season_end}}</div>
+                                    <div class="count">[{{$country->countryHotels()->count()}}]</div>
                                 </div>
                                 <div>
                                     <div class="d-flex">
+
+                                        {{-- delete ir edit rodomas tik admin --}}
+                                        @if(Auth::user()?->role == 'admin')
                                         <a href="{{route('countries-edit', $country)}}" class="btn btn-outline-success">Edit</a>
                                         <form action="{{route('countries-delete', $country)}}" method="post">
                                             <button country="submit" class="btn btn-outline-danger">Delete</button>
@@ -29,6 +33,7 @@
                                     @csrf
                                     @method('delete')
                                     </form>
+                                    @endif
                                 </div>
                             </div>
                         </li>
