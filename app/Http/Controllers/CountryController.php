@@ -45,7 +45,7 @@ class CountryController extends Controller
         $country->season_end = $request->season_end;
         $country->save();
 
-        return redirect()->route('countries-index')->with('ok', 'New type was created');
+        return redirect()->route('countries-index')->with('ok', 'New country was created');
     }
 
     /**
@@ -86,7 +86,7 @@ class CountryController extends Controller
         $country->season_end = $request->season_end;
         $country->save();
 
-        return redirect()->route('countries-index')->with('ok', 'Type was edited');
+        return redirect()->route('countries-index')->with('ok', 'Country was edited');
     }
 
     /**
@@ -99,7 +99,7 @@ class CountryController extends Controller
     {
         if (!$country->countryHotels()->count()) {
             $country->delete();
-            return redirect()->route('countries-index')->with('ok', 'Type was deleted');
+            return redirect()->route('countries-index')->with('ok', 'Country was deleted');
         }
         return redirect()->back()->with('no', 'Can not delete country, it has hotels.');
     }

@@ -48,6 +48,8 @@
                         </ul>
                         @csrf
                     </form>
+
+                    {{-- Make order BUY--}}
                     <ul class="list-group">
                         <li class="list-group-item">
                             <form action="{{route('make-order')}}" method="post">

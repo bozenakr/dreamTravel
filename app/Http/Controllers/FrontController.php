@@ -51,6 +51,7 @@ class FrontController extends Controller
         ]);
     }
 
+    //delete per update, nes viskas yra vienoje formoje, ir update ir delete
     public function updateCart(Request $request, CartService $cart)
     {
        
@@ -66,16 +67,15 @@ class FrontController extends Controller
     public function makeOrder(CartService $cart)
     {
         $order = new Order;
-
         $order->user_id = Auth::user()->id;
-
         $order->order_json = json_encode($cart->order());
 
         $order->save();
 
         $cart->empty();
 
-        return redirect()->route('start');
+        //alert
+        return redirect()->route('start')->with('ok', 'Hotel succesfully booked');
     }
 
 }

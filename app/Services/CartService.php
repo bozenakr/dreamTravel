@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services;
+
 use App\Models\Hotel;
 
 class CartService
@@ -14,7 +15,7 @@ class CartService
 
         $ids = array_keys($this->cart);
 
-        $this->cartList = hotel::whereIn('id', $ids)
+        $this->cartList = Hotel::whereIn('id', $ids)
         ->get()
         ->map(function($hotel) {
             $hotel->count = $this->cart[$hotel->id];
@@ -37,7 +38,7 @@ class CartService
         };
     }
 
-    //koki id ir kiek idet
+
     public function add(int $id, int $count)
     {
         if (isset($this->cart[$id])) {
@@ -88,10 +89,14 @@ class CartService
         $this->cart = [];
     }
 
+
+    
     
     public function test()
     {
         return 'Hello this is Cart Service';
     }
+
+
 
 }
