@@ -21,7 +21,7 @@ class FrontController extends Controller
 
 
         //su sort search ir per page
-       $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : 'all';
+       $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : '15';
 
        if (!$request->s) {
             if ($request->country_id && $request->country_id != 'all'){
@@ -44,16 +44,20 @@ class FrontController extends Controller
                 }
         }
         else {
-            $s = explode(' ', $request->s);
+        if ($request->s) {
+        $s = explode(' ', $request->s);
 
-            if (count($s) == 1) {
-                $hotels = Hotel::where('title', 'like', '%'.$request->s.'%')->paginate($perPageShow)->withQueryString();
+        $hotels = Hotel::where(function($query) use ($s) {
+            foreach ($s as $keyword) {
+                //iesko bent vieno sutampancio
+                // $query->orWhere('title', 'like', '%'.$keyword.'%');
+                //iesko visu sutampanciu
+                $query->Where('title', 'like', '%'.$keyword.'%');
             }
-            else {
-                $hotels = Hotel::where('title', 'like', '%'.$s[0].'%'.$s[1].'%')
-                ->orWhere('title', 'like', '%'.$s[1].'%'.$s[0].'%')
-                ->paginate($perPageShow)->withQueryString();
-            }
+        });
+
+        $hotels = $hotels->paginate($perPageShow)->withQueryString();
+}
         }
 
             $countries = Country::all();
