@@ -11,13 +11,65 @@ use Illuminate\Support\Facades\Auth;
 
 class FrontController extends Controller
 {
-    public function home ()
+    public function home (Request $request)
     {
-        $hotels = Hotel::paginate(9);
-        
+        //be sort search ir per page (su paginate)
+        // $hotels = Hotel::paginate(9);
+        // return view('front.home', [
+        //     'hotels' => $hotels
+        // ]);
+
+
+        //su sort search ir per page
+       $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : 'all';
+
+       if (!$request->s) {
+            if ($request->country_id && $request->country_id != 'all'){
+                $hotels = Hotel::where('country_id', $request->country_id);
+            }
+            else {
+                $hotels = Hotel::where('id', '>', 0);
+            }
+            
+            $hotels = match($request->sort ?? '') {
+                    'asc_price' => $hotels->orderBy('price'),
+                    'desc_price' => $hotels->orderBy('price', 'desc'),
+                    default => $hotels
+            };
+
+            if ($perPageShow == 'all'){
+                    $hotels = $hotels->get();
+                } else{
+                    $hotels = $hotels->paginate($perPageShow)->withQueryString();
+                }
+        }
+        else {
+            $s = explode(' ', $request->s);
+
+            if (count($s) == 1) {
+                $hotels = Hotel::where('title', 'like', '%'.$request->s.'%')->paginate($perPageShow)->withQueryString();
+            }
+            else {
+                $hotels = Hotel::where('title', 'like', '%'.$s[0].'%'.$s[1].'%')
+                ->orWhere('title', 'like', '%'.$s[1].'%'.$s[0].'%')
+                ->paginate($perPageShow)->withQueryString();
+            }
+        }
+
+            $countries = Country::all();
+
         return view('front.home', [
-            'hotels' => $hotels
+            'hotels' => $hotels,
+            'sortSelect' => Hotel::SORT,
+            'sortShow' => isset(Hotel::SORT[$request->sort]) ? $request->sort : '',
+            'perPageSelect' => Hotel::PER_PAGE,
+            'perPageShow' => $perPageShow,
+            'countries' => $countries,
+            'countryShow' => $request->country_id ? $request->country_id : '',
+            's' => $request->s ?? ''
         ]);
+    
+
     }
 
     public function showCategoriesHotels (Country $country)

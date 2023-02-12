@@ -22,6 +22,8 @@ class HotelController extends Controller
         return view('back.hotels.index', [
             'hotels' => $hotels
         ]);
+
+
     }
 
     /**

@@ -10,14 +10,14 @@ class Hotel extends Model
     use HasFactory;
 
     const SORT = [
-        'asc_name' => 'Name A-Z',
-        'desc_name' => 'Name Z-A',
-        'asc_size' => 'Size 0-9',
-        'desc_size' => 'Size 9-0'
+        // 'asc_name' => 'Name A-Z',
+        // 'desc_name' => 'Name Z-A',
+        'asc_price' => 'Price ascending',
+        'desc_price' => 'Price descending',
     ];
 
     const PER_PAGE = [
-        'all', 5, 12, 21, 34
+        'all', 9, 15, 27
     ];
 
     public function hotelCountry()
