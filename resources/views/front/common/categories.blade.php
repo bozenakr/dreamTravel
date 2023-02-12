@@ -12,7 +12,7 @@
                         <li class="list-group-item">
                             <div class="list-table cats">
                                 <div class="list-table__content">
-                                    <a href="{{route('show-cats-hotels', $country)}}">
+                                    <a href="{{route('show-categories-hotels', $country)}}">
                                         <h3>
                                             {{$country->title}}
                                             <div class="count">[{{$country->countryHotels()->count()}}]</div>
