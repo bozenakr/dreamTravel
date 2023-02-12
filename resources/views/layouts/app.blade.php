@@ -18,8 +18,10 @@
     @vite(['resources/sass/back/app.scss', 'resources/js/back/app.js'])
 </head>
 <body>
+
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm" style="height:80px">
+
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -109,7 +111,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="margin-top:50px">
             @yield('content')
         </main>
     </div>

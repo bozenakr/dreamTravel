@@ -1,11 +1,27 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+@import './components.scss';
+@import './clients.scss';
+@import './deposit-withdraw.scss';
+@import './new-account.scss';
+
+
+.pagination .page-item.active .page-link {
+    background-color: rgb(0, 140, 172);
+    color: white;
+    border: 1px solid rgb(41, 121, 207);
+}
+
+.pagination .page-item:not(.active) .page-link {
+    color: rgb(52, 52, 52);
+}
+
+
 .list-table {
     margin: 7px;
     padding: 7px;

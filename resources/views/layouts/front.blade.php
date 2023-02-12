@@ -19,9 +19,12 @@
     <!-- Scripts -->
     @vite(['resources/sass/front/app.scss', 'resources/js/front/app.js'])
 </head>
-<body>
+<body style="margin-top:100px">
+
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm" style="height:80px; margin-bottom:100px">
+
+
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img class="logo" src="{{asset('img/logo.jpg')}}" alt="logo">
