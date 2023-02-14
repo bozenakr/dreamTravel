@@ -6,6 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>dreamTravel - {{$hotel->title}}</title>
     <style>
+        @font-face {
+            font-family: 'Roboto';
+            src: url("C:\xampp\htdocs\dreamTravel\storage\fonts\Roboto-Bold.ttf") format("truetype");
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            src: url("C:\xampp\htdocs\dreamTravel\storage\fonts\Roboto-Regular.ttf") format("truetype");
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
         .mb-3 {
             margin: 20px;
         }

@@ -60,7 +60,7 @@ class FrontController extends Controller
 }
         }
 
-            $countries = Country::all();
+        $countries = Country::all();
 
         return view('front.home', [
             'hotels' => $hotels,

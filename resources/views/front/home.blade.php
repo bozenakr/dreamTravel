@@ -20,7 +20,6 @@
                     <div class=" col-4">
                         <div class="head-buttons">
                             <button type="submit" class="btn btn-outline-success" style="margin-top: 30px">Ieškoti</button>
-
                         </div>
                     </div>
                 </div>
