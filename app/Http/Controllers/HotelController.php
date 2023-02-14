@@ -164,6 +164,7 @@ class HotelController extends Controller
 
     public function pdf(hotel $hotel)
     {
+        // $qrCode = 
         $pdf = Pdf::loadView('back.hotels.pdf', ['hotel' => $hotel]);
         return $pdf->download('dreamTravel '.'-'.' '.$hotel->title.'.pdf');
     }

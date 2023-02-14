@@ -37,15 +37,29 @@
             width: auto;
         }
 
+        .qr {
+            float: right;
+            padding: 10px 100px 0 0;
+        }
+
     </style>
 </head>
 <body>
     <h1>dreamTravel offer - {{$hotel->hotelCountry?->title}}</h1>
+
+    {{-- QR CODE --}}
+    <div class="col-9">
+        <div class="mb-3 qr">
+            <img src="data:image/png;base64, {{ base64_encode(QrCode::phoneNumber('+37000000000')) }} ">
+        </div>
+    </div>
     <div class="card-body">
         <div class="mb-3">
             <label class="form-label">Hotel</label>
             {{$hotel->title}}
         </div>
+
+
         <div class="mb-3">
             <label class="form-label">Nights</label>
             {{$hotel->days}} nights
@@ -54,6 +68,10 @@
             <label class="form-label">Price</label>
             {{$hotel->price}} EUR
         </div>
+
+
+
+
         <div class="col-9">
             <div class="mb-3">
                 <label class="form-label">Hotel description</label>
@@ -67,6 +85,9 @@
             </div>
         </div>
         @endif
+
+
+
 
 </body>
 </html>

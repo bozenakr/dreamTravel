@@ -5,6 +5,7 @@ use App\Http\Controllers\HotelController as H;
 use App\Http\Controllers\CountryController as C;
 use App\Http\Controllers\FrontController as F;
 use App\Http\Controllers\OrderController as O;
+use App\Http\Controllers\QrCodeController;
 
 
 /*
@@ -57,7 +58,10 @@ Route::prefix('admin/hotels')->name('hotels-')->group(function () {
     Route::get('/edit/{hotel}', [H::class, 'edit'])->name('edit')->middleware('roles:A|M');
     Route::put('/edit/{hotel}', [H::class, 'update'])->name('update')->middleware('roles:A|M');
     Route::delete('/delete/{hotel}', [H::class, 'destroy'])->name('delete')->middleware('roles:A');
+    //pdf
     Route::get('/pdf/{hotel}', [H::class, 'pdf'])->name('pdf')->middleware('roles:A|M');
+    //qrcode
+    Route::get('/qrcode/{hotel}', [QrCodeController::class,'index'])->name('qrcode')->middleware('roles:A|M');;
 });
 
 Route::prefix('admin/orders')->name('orders-')->group(function () {
@@ -65,6 +69,9 @@ Route::prefix('admin/orders')->name('orders-')->group(function () {
     Route::put('/edit/{order}', [O::class, 'update'])->name('update')->middleware('roles:A');
     Route::delete('/delete/{order}', [O::class, 'destroy'])->name('delete')->middleware('roles:A');
 });
+
+
+
 
 
 Auth::routes();
