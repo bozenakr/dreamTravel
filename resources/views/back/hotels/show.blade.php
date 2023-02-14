@@ -45,9 +45,6 @@
                     <div class="mb-3" style="justify-content: center; display: flex">
                         <a href="{{route('hotels-pdf', $hotel)}}" class="btn btn-outline-primary">Download PDF</a>
                     </div>
-                    <div class="mb-3" style="justify-content: center; display: flex">
-                        <a href="{{route('hotels-qrcode', $hotel)}}" class="btn btn-outline-primary">Qr</a>
-                    </div>
                 </div>
             </div>
         </div>
