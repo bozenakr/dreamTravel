@@ -76,14 +76,46 @@ class FrontController extends Controller
 
     }
 
-    public function showCategoriesHotels (Country $country)
+    public function showCategoriesHotels (Request $request, Country $country)
     {
+        // $hotels = Hotel::where('country_id', $country->id)->paginate(9);
+        
+        // return view('front.home', [
+            //     'hotels' => $hotels
+            // ]);
+            
+        $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : '15';
         $hotels = Hotel::where('country_id', $country->id)->paginate(9);
 
-        return view('front.home', [
-            'hotels' => $hotels
-        ]);
-    }
+        if ($request->s) {
+        $s = explode(' ', $request->s);
+
+        $hotels = Hotel::where(function($query) use ($s) {
+            foreach ($s as $keyword) {
+                //iesko bent vieno sutampancio
+                // $query->orWhere('title', 'like', '%'.$keyword.'%');
+                //iesko visu sutampanciu
+                $query->Where('title', 'like', '%'.$keyword.'%');
+            }
+        });
+
+        }
+
+    $countries = Country::all();
+
+    return view('front.home', [
+        'hotels' => $hotels,
+        'sortSelect' => Hotel::SORT,
+        'sortShow' => isset(Hotel::SORT[$request->sort]) ? $request->sort : '',
+        'perPageSelect' => Hotel::PER_PAGE,
+        'perPageShow' => $perPageShow,
+        'countries' => $countries,
+        'countryShow' => $request->country_id ? $request->country_id : '',
+        's' => $request->s ?? ''
+    ]);
+
+}
+
 
     public function showHotel (Hotel $hotel)
     {
