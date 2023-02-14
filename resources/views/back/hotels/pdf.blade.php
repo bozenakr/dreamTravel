@@ -59,32 +59,32 @@
             {{$hotel->title}}
         </div>
 
-
+        {{-- DATES --}}
         <div class="mb-3">
+            <label class="form-label">Dates</label>
+            {{$hotel->start}} - {{$hotel->end}}
+        </div>
+        {{-- <div class="mb-3">
             <label class="form-label">Nights</label>
             {{$hotel->days}} nights
-        </div>
+    </div> --}}
+    <div class="mb-3">
+        <label class="form-label">Price</label>
+        {{$hotel->price}} EUR
+    </div>
+    <div class="col-9">
         <div class="mb-3">
-            <label class="form-label">Price</label>
-            {{$hotel->price}} EUR
+            <label class="form-label">Hotel description</label>
+            <div>{{$hotel->desc}}</div>
         </div>
-
-
-
-
-        <div class="col-9">
-            <div class="mb-3">
-                <label class="form-label">Hotel description</label>
-                <div>{{$hotel->desc}}</div>
-            </div>
+    </div>
+    @if($hotel->photo)
+    <div class="col-4">
+        <div class="mb-3 img">
+            <img src="{{asset($hotel->photo)}}">
         </div>
-        @if($hotel->photo)
-        <div class="col-4">
-            <div class="mb-3 img">
-                <img src="{{asset($hotel->photo)}}">
-            </div>
-        </div>
-        @endif
+    </div>
+    @endif
 
 
 

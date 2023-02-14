@@ -25,36 +25,49 @@
                             <label class="form-label">Hotel name</label>
                             <input type="text" name="hotel_title" class="form-control" value="{{old('hotel_title')}}">
                         </div>
+
+                        {{-- DATES --}}
                         <div class="mb-3">
-                            <label class="form-label">Days</label>
-                            <input type="text" name="hotel_days" class="form-control" value="{{old('hotel_days')}}">
+                            <label class="form-label">Check-in</label>
+                            <input type="date" name="hotel_start" class="form-control" min="{{}}" value="{{}}">
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label">Price</label>
-                            <input type="text" name="hotel_price" class="form-control" value="{{old('hotel_price')}}">
+                            <label class="form-label">Check-out</label>
+                            <input type="date" name="hotel_end" class="form-control" value="{{old('hotel_end')}}">
                         </div>
-                        <div class="col-3">
-                            <div class="mb-3">
-                                <label class="form-label">Hotel Photo</label>
-                                <input type="file" class="form-control" name="photo">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Hotel description</label>
-                                <textarea class="form-control" rows="10" name="hotel_desc">{{old('hotel_desc')}}</textarea>
-                            </div>
-                        </div>
-                        <div class="mb-3" style="justify-content: center; display: flex">
-                            <button type="submit" class="btn btn-outline-warning mt-4">Add</button>
-                        </div>
-                        @csrf
-                    </form>
+
+                        {{-- <div class="mb-3">
+                            <label class="form-label">Nights</label>
+                            <input type="text" name="hotel_nights" class="form-control" value="{{old('hotel_nights')}}">
+                </div> --}}
+
+                <div class="mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="text" name="hotel_price" class="form-control" value="{{old('hotel_price')}}">
                 </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label class="form-label">Hotel Photo</label>
+                        <input type="file" class="form-control" name="photo">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Hotel description</label>
+                        <textarea class="form-control" rows="10" name="hotel_desc">{{old('hotel_desc')}}</textarea>
+                    </div>
+                </div>
+                <div class="mb-3" style="justify-content: center; display: flex">
+                    <button type="submit" class="btn btn-outline-warning mt-4">Add</button>
+                </div>
+                @csrf
+                </form>
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 
 @endsection

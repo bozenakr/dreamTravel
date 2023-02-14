@@ -39,11 +39,14 @@ class DatabaseSeeder extends Seeder
                 'season_end' => '2023-'.rand(7,12).'-'.'28',
             ]);  
         }
+
+        
         foreach(range(1, 40) as $i) {
             DB::table('hotels')->insert([
                 'title' => $faker->state. ' ' .$faker->city,
                 'price' => rand(1499,9999),
-                'days' => rand(7,21),
+                'start' => '2023-'.rand(1,6).'-'.'1',
+                'end' => '2023-'.rand(7,12).'-'.'28',
                 'country_id' => rand(1,10),
                 'desc' => $faker->realText(500, 5),
             ]);  

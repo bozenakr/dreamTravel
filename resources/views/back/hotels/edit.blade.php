@@ -25,51 +25,64 @@
                             <label class="form-label">Hotel name</label>
                             <input type="text" name="hotel_title" class="form-control" value="{{$hotel->title}}">
                         </div>
+
+                        {{-- CARBON DATES --}}
                         <div class="mb-3">
-                            <label class="form-label">Days</label>
-                            <input type="text" name="hotel_days" class="form-control" value="{{$hotel->days}}">
+                            <label class="form-label">Check-in</label>
+                            <input type="date" name="hotel_start" class="form-control" value="{{ old('hotel_start') }}">
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label">Price</label>
-                            <input type="text" name="hotel_price" class="form-control" value="{{$hotel->price}}">
+                            <label class="form-label">Check-out</label>
+                            <input type="date" name="hotel_end" class="form-control" value="{{ old('hotel_end') }}">
                         </div>
-                        <div class="col-3">
-                            <div class="mb-3">
-                                <label class="form-label">Hotel Photo</label>
-                                <input type="file" class="form-control" name="photo">
-                            </div>
 
-                            @if($hotel->photo)
-                            <div class="col-4">
-                                <div class="mb-3 img">
-                                    <img src="{{asset($hotel->photo)}}">
-                                </div>
-                            </div>
-                            @endif
+                        {{-- <div class="mb-3">
+                            <label class="form-label">Nights</label>
+                            <input type="text" name="hotel_nights" class="form-control" value="{{old('nights')}}">
+                </div> --}}
 
-                        </div>
-                        @if($hotel->photo)
-                        <button type="submit" class="btn btn-outline-warning mt-4" name="delete_photo" value="1">Delete Photo</button>
-                        @endif
-
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <label class="form-label">Hotel description</label>
-                                <textarea class="form-control" rows="10" name="hotel_desc">{{$hotel->desc}}</textarea>
-                            </div>
-                        </div>
-                        <div class="mb-3" style="justify-content: center; display: flex">
-                            <button type="submit" class="btn btn-outline-warning mt-4">Save</button>
-
-                        </div>
-                        @csrf
-                        @method('put')
-                    </form>
+                <div class="mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="text" name="hotel_price" class="form-control" value="{{$hotel->price}}">
                 </div>
+                <div class="col-3">
+                    <div class="mb-3">
+                        <label class="form-label">Hotel Photo</label>
+                        <input type="file" class="form-control" name="photo">
+                    </div>
+
+                    @if($hotel->photo)
+                    <div class="col-4">
+                        <div class="mb-3 img">
+                            <img src="{{asset($hotel->photo)}}">
+                        </div>
+                    </div>
+                    @endif
+
+                </div>
+                @if($hotel->photo)
+                <button type="submit" class="btn btn-outline-warning mt-4" name="delete_photo" value="1">Delete Photo</button>
+                @endif
+
+                <div class="col-12">
+                    <div class="mb-3">
+                        <label class="form-label">Hotel description</label>
+                        <textarea class="form-control" rows="10" name="hotel_desc">{{$hotel->desc}}</textarea>
+                    </div>
+                </div>
+                <div class="mb-3" style="justify-content: center; display: flex">
+                    <button type="submit" class="btn btn-outline-warning mt-4">Save</button>
+
+                </div>
+                @csrf
+                @method('put')
+                </form>
             </div>
         </div>
-
     </div>
+
+</div>
 </div>
 
 @endsection

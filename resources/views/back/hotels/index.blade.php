@@ -21,7 +21,10 @@
                                     @endif
                                     <h5 class="m-2">{{$hotel->title}}</h5>
                                     <div class="m-2">{{$hotel->hotelCountry->title}}</div>
-                                    <div class="m-2">{{$hotel->days}}</div>
+                                    <div class="m-2">{{$hotel->startNice}}</div>
+                                    <div class="m-2">{{$hotel->endNice}}</div>
+                                    <div class="m-2">{{$hotel->nights}}
+                                    </div>
                                     <div class="m-2">{{$hotel->price}}</div>
                                 </div>
                                 <div>

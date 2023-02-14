@@ -17,12 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->decimal('price', 10, 2)->unsigned();
-            $table->integer('days')->unsigned();
+            $table->date('start')->nullable();
+            $table->date('end')->nullable();
+            $table->integer('nights')->unsigned()->nullable();
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries');
             $table->string('photo', 200)->nullable();
             $table->text('desc')->nullable();
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

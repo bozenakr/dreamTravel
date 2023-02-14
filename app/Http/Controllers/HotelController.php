@@ -7,6 +7,7 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Intervention\Image\ImageManager;
+use Carbon\Carbon;
 // use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
@@ -18,12 +19,17 @@ class HotelController extends Controller
      */
     public function index()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::orderBy('id', 'desc')->get();
+
+        //Datos formatavimas
+        $hotels = $hotels->map(function($format_date) {
+            $format_date->startNice = Carbon::parse($format_date->start)->format('Y-m-d');
+            $format_date->endNice = Carbon::parse($format_date->end)->format('Y-m-d');
+            return $format_date;
+        });
         return view('back.hotels.index', [
             'hotels' => $hotels
         ]);
-
-
     }
 
     /**
@@ -63,9 +69,21 @@ class HotelController extends Controller
 
         }
 
+        //CARBON (start ir end tai objektai)
+        //formoje 'hotel_start', DB 'start'
+        $start = Carbon::parse($request->hotel_start);
+        // $end = Carbon::parse($request->hotel_end)->addDays($request->hotel_nights);
+        $end = Carbon::parse($request->hotel_end);
+        $stay_length = Carbon::parse($start)->diffInDays($end);
+
+        //i DB
         $hotel->country_id = $request->country_id;
         $hotel->title = $request->hotel_title;
-        $hotel->days = $request->hotel_days;
+        
+        //CARBON
+        $hotel->start = $start;
+        $hotel->end = $end;
+        $hotel->nights = $stay_length;
         $hotel->price = $request->hotel_price;
         $hotel->desc = $request->hotel_desc;
 
@@ -139,11 +157,31 @@ class HotelController extends Controller
             
         }
         
+        // $hotel->country_id = $request->country_id;
+        // $hotel->title = $request->hotel_title;
+        // $hotel->nights = $request->hotel_nights;
+        // $hotel->price = $request->hotel_price;
+        // $hotel->desc = $request->hotel_desc;
+
+
+        //CARBON (start ir end tai objektai);
+        //formoje 'hotel_start, hotel_end', DB 'start, end'
+        $start = Carbon::parse($request->hotel_start);
+        // $end = Carbon::parse($request->hotel_end)->addDays($request->hotel_nights);
+        $end = Carbon::parse($request->hotel_end);
+        $stay_length = Carbon::parse($start)->diffInDays($end);
+
+     
+        //i DB is formos
         $hotel->country_id = $request->country_id;
         $hotel->title = $request->hotel_title;
-        $hotel->days = $request->hotel_days;
+        //CARBON
+        $hotel->start = $start;
+        $hotel->end = $end;
+        $hotel->nights = $stay_length;
         $hotel->price = $request->hotel_price;
         $hotel->desc = $request->hotel_desc;
+
 
         $hotel->save();
         
