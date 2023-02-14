@@ -60,7 +60,7 @@ Route::prefix('admin/hotels')->name('hotels-')->group(function () {
     Route::delete('/delete/{hotel}', [H::class, 'destroy'])->name('delete')->middleware('roles:A');
     //pdf
     Route::get('/pdf/{hotel}', [H::class, 'pdf'])->name('pdf')->middleware('roles:A|M');
-    //qrcode
+    //QR code
     Route::get('/qrcode/{hotel}', [QrCodeController::class,'index'])->name('qrcode')->middleware('roles:A|M');;
 });
 
