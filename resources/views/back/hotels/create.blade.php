@@ -18,6 +18,8 @@
                             <select class="form-select" name="country_id">
                                 @foreach($countries as $country)
                                 <option value="{{$country->id}}">{{$country->title}}</option>
+                                {{-- <label class="form-label">Season</label>
+                                <input type="text" name="" class="form-control" readonly value="{{$country->season_start}} - {{$country->season_end}}"> --}}
                                 @endforeach
                             </select>
                         </div>
@@ -29,7 +31,7 @@
                         {{-- DATES --}}
                         <div class="mb-3">
                             <label class="form-label">Check-in</label>
-                            <input type="date" name="hotel_start" class="form-control" min="{{}}" value="{{}}">
+                            <input type="date" name="hotel_start" class="form-control" min="" value="">
                         </div>
 
                         <div class="mb-3">

@@ -13,4 +13,12 @@ class Country extends Model
     {
     return $this->hasMany(Hotel::class, 'country_id', 'id');
     }
+
+        
+    //CARBON
+    public $timestamps = false; //jei kuriame su new ir nera timestamps
+    protected $casts = [
+        'start' => 'date',
+        'end' => 'date',
+    ];
 }

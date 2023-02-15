@@ -29,12 +29,11 @@
                         {{-- CARBON DATES --}}
                         <div class="mb-3">
                             <label class="form-label">Check-in</label>
-                            <input type="date" name="hotel_start" class="form-control" value="{{ old('hotel_start') }}">
+                            <input type="date" name="hotel_start" class="form-control" value="{{old('hotel_start')}}">
                         </div>
-
                         <div class="mb-3">
                             <label class="form-label">Check-out</label>
-                            <input type="date" name="hotel_end" class="form-control" value="{{ old('hotel_end') }}">
+                            <input type="date" name="hotel_end" class="form-control" value="{{old('hotel_end')}}">
                         </div>
 
                         {{-- <div class="mb-3">

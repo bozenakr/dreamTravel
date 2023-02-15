@@ -114,7 +114,8 @@
                         <div class="bottom">
                             <div>
                                 <div class="type"> {{$hotel->hotelCountry->title}}</div>
-                                <div class="size"> {{$hotel->days}} nights</div>
+                                <div class="size"> {{$hotel->start}} - {{$hotel->end}}</div>
+                                <div class="size"> {{$hotel->nights}} nights</div>
                             </div>
                             <div class="buy">
                                 <div class="price"> {{$hotel->price}} EUR</div>

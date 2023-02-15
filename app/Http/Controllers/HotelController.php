@@ -76,6 +76,7 @@ class HotelController extends Controller
         $end = Carbon::parse($request->hotel_end);
         $stay_length = Carbon::parse($start)->diffInDays($end);
 
+        
         //i DB
         $hotel->country_id = $request->country_id;
         $hotel->title = $request->hotel_title;
@@ -86,10 +87,31 @@ class HotelController extends Controller
         $hotel->nights = $stay_length;
         $hotel->price = $request->hotel_price;
         $hotel->desc = $request->hotel_desc;
+        
+        
+        //Carbon comparing
+        // eq() equals
+        // ne() not equals
+        // gt() greater than
+        // gte() greater than or equals
+        // lt() less than
+        // lte() less than or equals
+        
+        $x = $hotel->hotelCountry->season_start;
+        $y = $hotel->hotelCountry->season_end;
+        $a = $request->hotel_start;
+        $b = $request->hotel_end;
 
+        // dd($x);
+        // dd($a);
+        
+        if (($x > $a) || ($y < $b)) {
+            return redirect()->back()->with('no', 'Out of season! Pick date from ' . $x . ' to ' . $y);
+        }
+        else {
         $hotel->save();
-
         return redirect()->route('hotels-index')->with('ok', 'Hotel succesfully added');
+        }
     }
     
 
@@ -100,8 +122,9 @@ class HotelController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Hotel $hotel)
-    {
-        return view('back.hotels.show', ['hotel' => $hotel]);
+    {      
+        return view('back.hotels.show', [
+            'hotel' => $hotel]);
     }
 
     /**
@@ -165,7 +188,7 @@ class HotelController extends Controller
 
 
         //CARBON (start ir end tai objektai);
-        //formoje 'hotel_start, hotel_end', DB 'start, end'
+        //formoje - 'hotel_start, hotel_end', DB - 'start, end'
         $start = Carbon::parse($request->hotel_start);
         // $end = Carbon::parse($request->hotel_end)->addDays($request->hotel_nights);
         $end = Carbon::parse($request->hotel_end);
@@ -183,9 +206,29 @@ class HotelController extends Controller
         $hotel->desc = $request->hotel_desc;
 
 
-        $hotel->save();
+       //Carbon comparing
+        // eq() equals
+        // ne() not equals
+        // gt() greater than
+        // gte() greater than or equals
+        // lt() less than
+        // lte() less than or equals
         
+        $x = $hotel->hotelCountry->season_start;
+        $y = $hotel->hotelCountry->season_end;
+        $a = $request->hotel_start;
+        $b = $request->hotel_end;
+
+        // dd($x);
+        // dd($a);
+        
+        if (($x > $a) || ($y < $b)) {
+            return redirect()->back()->with('no', 'Out of season! Pick date from ' . $x . ' to ' . $y);
+        }
+        else {
+        $hotel->save();
         return redirect()->route('hotels-index')->with('ok', 'Hotel succesfully edited');
+        }
     }
 
     /**

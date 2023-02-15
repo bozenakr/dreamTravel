@@ -112,6 +112,7 @@
         </nav>
 
         <main class="py-4" style="margin-top:50px">
+            @include('layouts.messages')
             @yield('content')
         </main>
     </div>

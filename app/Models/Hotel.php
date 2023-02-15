@@ -34,10 +34,6 @@ class Hotel extends Model
         $this->photo = null;
         $this->save();
     }
-    //CARBON
-    public $timestamps = false; //jei kuriame su new ir nera timestamps
-        protected $casts = [
-        'start' => 'date',
-        'end' => 'date',
-    ];
+        public $timestamps = false; //jei kuriame su new ir nera timestamps
+
 }

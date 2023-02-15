@@ -15,7 +15,8 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::all()->sortBy('title');
+        // $countries = Country::all()->sortBy('title');
+        $countries = Country::orderBy('id', 'desc')->get();
         return view('back.countries.index', [
             'countries' => $countries
         ]);
@@ -101,6 +102,6 @@ class CountryController extends Controller
             $country->delete();
             return redirect()->route('countries-index')->with('ok', 'Country was deleted');
         }
-        return redirect()->back()->with('no', 'Can not delete country, it has hotels.');
+        return redirect()->back()->with('no', 'Can not delete country, it has travel offers.');
     }
 }
