@@ -8,27 +8,19 @@
 {{-- SEARCH --}}
 <form action="{{route('hotels-index')}}" method="get">
     <div class="container">
-        <div class="row justify-content-start">
+        <div class="row justify-content-space-between">
             <div class="col-2">
                 <div class="mb-3">
                     <label class="form-label">Search</label>
                     <input type="text" class="form-control" name="s" value="{{$s}}">
                 </div>
             </div>
-            <div class=" col-4">
+            <div class="col-2">
                 <div class="head-buttons">
-                    <button type="submit" class="btn btn-outline-success" style="margin-top: 30px">Ieškoti</button>
+                    <button type="submit" class="btn btn-outline-success" style="margin-top: 30px">Search</button>
                 </div>
             </div>
-        </div>
-    </div>
-</form>
-
-{{-- SORT BY --}}
-<form action="{{route('hotels-index')}}" method="get">
-
-    <div class="container">
-        <div class="row justify-content-end">
+            {{-- SORT BY --}}
             <div class="col-2">
                 <div class="mb-3">
                     <label class="form-label">Sort by</label>
@@ -40,10 +32,9 @@
                     </select>
                 </div>
             </div>
-
             {{-- PER PAGE PAGINATOR --}}
             {{-- Arba cia per page arba paginate --}}
-            <div class="col-1">
+            <div class="col-2">
                 <div class="mb-3">
                     <label class="form-label">Per page</label>
                     <select class="form-select" name="per_page">
@@ -54,9 +45,9 @@
                 </div>
             </div>
 
-
             {{-- SELECT COUNTRY --}}
             {{-- Arba cia select country arba categories blade --}}
+
             <div class="col-2">
                 <div class="mb-3">
                     <label class="form-label">Select Country</label>
@@ -69,9 +60,8 @@
                 </div>
             </div>
 
-
             {{-- BUTTONS SHOW & RESET --}}
-            <div class="col-2 ">
+            <div class="col-1">
                 <div class=" head-buttons">
                     <button type="submit" class="btn btn-outline-success" style="margin-right: 5px; margin-top: 30px">Show</button>
                     <a href="{{route('hotels-index')}}" class="btn btn-outline-success" style="margin-top: 30px">Reset</a>
@@ -79,8 +69,18 @@
                 </div>
             </div>
 
+
         </div>
     </div>
+</form>
+
+
+
+
+
+
+</div>
+</div>
 </form>
 
 
