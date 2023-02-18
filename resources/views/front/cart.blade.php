@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-3">
+        {{-- <div class="col-3">
             @include('front.common.categories')
-        </div>
+        </div> --}}
         <div class="col-9">
             <div class="card-body">
                 <div class="card-body">
