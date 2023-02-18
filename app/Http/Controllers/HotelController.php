@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Intervention\Image\ImageManager;
 use Carbon\Carbon;
-// use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class HotelController extends Controller
 {
@@ -53,6 +53,30 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+
+        //VALIDATION
+        $validator = Validator::make(
+        $request->all(),
+        [
+        'hotel_title' => 'required|alpha|min:3',
+        //min 1, max 2 digits after dot
+        'hotel_price' => 'required|regex:/^[1-9]\d*(\.\d{1,2})?$/',
+
+        ],
+        [
+            'hotel_title.required' => 'Hotel name field can not be empty.',
+            'hotel_title.min' => 'Hotel name - please enter at least 3 characters.',
+            'hotel_title.alpha' => 'Please enter correct hotel name.',
+            'hotel_price.required' => 'Price field can not be empty.',
+            'hotel_price.regex' => 'Please enter a valid price (minimum 1.00 EUR).',
+        ]);
+            
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+
+
         $hotel = new Hotel;
 
         if ($request->file('photo')) {
@@ -151,7 +175,30 @@ class HotelController extends Controller
      */
     public function update(Request $request, Hotel $hotel)
     {
-                   
+        //VALIDATION
+        $validator = Validator::make(
+        $request->all(),
+        [
+        'hotel_title' => 'required|alpha|min:3',
+        //min 1, max 2 digits after dot
+        'hotel_price' => 'required|regex:/^[1-9]\d*(\.\d{1,2})?$/',
+        ],
+        [
+            'hotel_title.required' => 'Hotel name field can not be empty.',
+            'hotel_title.min' => 'Hotel name - please enter at least 3 characters.',
+            'hotel_title.alpha' => 'Please enter correct hotel name.',
+            'hotel_price.required' => 'Price field can not be empty.',
+            'hotel_price.regex' => 'Please enter a valid price (minimum 1.00 EUR).',
+        ]);
+            
+            if ($validator->fails()) {
+                $request->flash();
+                return redirect()->back()->withErrors($validator);
+            }
+
+
+
+        //Pictures
         if ($request->delete_photo) {
             $hotel->deletePhoto();
             return redirect()->back()->with('ok', 'Photo was deleted');
