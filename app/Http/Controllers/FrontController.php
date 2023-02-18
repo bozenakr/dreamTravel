@@ -39,7 +39,7 @@ class FrontController extends Controller
 
             if ($perPageShow == 'all'){
                     $hotels = $hotels->get();
-                } else{
+                } else {
                     $hotels = $hotels->paginate($perPageShow)->withQueryString();
                 }
         }

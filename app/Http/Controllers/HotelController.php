@@ -17,20 +17,83 @@ class HotelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index (Request $request)
     {
-        $hotels = Hotel::orderBy('id', 'desc')->get();
 
-        //Datos formatavimas
-        $hotels = $hotels->map(function($format_date) {
-            $format_date->startNice = Carbon::parse($format_date->start)->format('Y-m-d');
-            $format_date->endNice = Carbon::parse($format_date->end)->format('Y-m-d');
-            return $format_date;
-        });
+        $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : '15';
+
+        if (!$request->s) {
+            if ($request->country_id && $request->country_id != 'all'){
+                $hotels = Hotel::where('country_id', $request->country_id);
+            }
+            else {
+                $hotels = Hotel::where('id', '>', 0);
+            }
+
+            $hotels = match($request->sort ?? '') {
+                'asc_price' => $hotels->orderBy('price'),
+                'desc_price' => $hotels->orderBy('price', 'desc'),
+                default => $hotels
+            };
+
+            if ($perPageShow == 'all'){
+                $hotels = $hotels->get();
+            } else {
+                $hotels = $hotels->paginate($perPageShow)->withQueryString();
+            }
+        }
+        else {
+            if ($request->s) {
+                $s = explode(' ', $request->s);
+
+                $hotels = Hotel::where(function($query) use ($s) {
+                    foreach ($s as $keyword) {
+                        //iesko bent vieno sutampancio
+                        // $query->orWhere('title', 'like', '%'.$keyword.'%');
+                        //iesko visu sutampanciu
+                        $query->Where('title', 'like', '%'.$keyword.'%');
+                    }
+                });
+
+                if ($perPageShow == 'all'){
+                    $hotels = $hotels->get();
+                } else {
+                    $hotels = $hotels->paginate($perPageShow)->withQueryString();
+                }
+            }
+        }
+
+        $countries = Country::all();
+
         return view('back.hotels.index', [
-            'hotels' => $hotels
+            'hotels' => $hotels,
+            'sortSelect' => Hotel::SORT,
+            'sortShow' => isset(Hotel::SORT[$request->sort]) ? $request->sort : '',
+            'perPageSelect' => Hotel::PER_PAGE,
+            'perPageShow' => $perPageShow,
+            'countries' => $countries,
+            'countryShow' => $request->country_id ? $request->country_id : '',
+            's' => $request->s ?? ''
         ]);
     }
+
+
+
+
+
+
+        // $hotels = Hotel::orderBy('id', 'desc')->get();
+
+        // //Datos formatavimas
+        // $hotels = $hotels->map(function($format_date) {
+        //     $format_date->startNice = Carbon::parse($format_date->start)->format('Y-m-d');
+        //     $format_date->endNice = Carbon::parse($format_date->end)->format('Y-m-d');
+        //     return $format_date;
+        // });
+        // return view('back.hotels.index', [
+        //     'hotels' => $hotels
+        // ]);
+    
 
     /**
      * Show the form for creating a new resource.
@@ -58,15 +121,15 @@ class HotelController extends Controller
         $validator = Validator::make(
         $request->all(),
         [
-        'hotel_title' => 'required|alpha|min:3',
-        //min 1, max 2 digits after dot
+        //only letters, spaces + lt letters + min 3 letters
+        'hotel_title' => 'required|min:3|regex:/^([a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+){3,}$/',
         'hotel_price' => 'required|regex:/^[1-9]\d*(\.\d{1,2})?$/',
 
         ],
         [
             'hotel_title.required' => 'Hotel name field can not be empty.',
             'hotel_title.min' => 'Hotel name - please enter at least 3 characters.',
-            'hotel_title.alpha' => 'Please enter correct hotel name.',
+            'hotel_title.regex' => 'regex Please enter correct hotel name.',
             'hotel_price.required' => 'Price field can not be empty.',
             'hotel_price.regex' => 'Please enter a valid price (minimum 1.00 EUR).',
         ]);
@@ -179,14 +242,15 @@ class HotelController extends Controller
         $validator = Validator::make(
         $request->all(),
         [
-        'hotel_title' => 'required|alpha|min:3',
-        //min 1, max 2 digits after dot
+        //only letters, spaces + lt letters + min 3 letters
+        'hotel_title' => 'required|min:3|regex:/^([a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+){3,}$/',
         'hotel_price' => 'required|regex:/^[1-9]\d*(\.\d{1,2})?$/',
+
         ],
         [
             'hotel_title.required' => 'Hotel name field can not be empty.',
             'hotel_title.min' => 'Hotel name - please enter at least 3 characters.',
-            'hotel_title.alpha' => 'Please enter correct hotel name.',
+            'hotel_title.regex' => 'Please enter correct hotel name.',
             'hotel_price.required' => 'Price field can not be empty.',
             'hotel_price.regex' => 'Please enter a valid price (minimum 1.00 EUR).',
         ]);

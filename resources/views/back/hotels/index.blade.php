@@ -3,6 +3,87 @@
 @section('content')
 @section('title', 'Hotels')
 
+
+
+{{-- SEARCH --}}
+<form action="{{route('hotels-index')}}" method="get">
+    <div class="container">
+        <div class="row justify-content-start">
+            <div class="col-2">
+                <div class="mb-3">
+                    <label class="form-label">Search</label>
+                    <input type="text" class="form-control" name="s" value="{{$s}}">
+                </div>
+            </div>
+            <div class=" col-4">
+                <div class="head-buttons">
+                    <button type="submit" class="btn btn-outline-success" style="margin-top: 30px">Ieškoti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{{-- SORT BY --}}
+<form action="{{route('hotels-index')}}" method="get">
+
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-2">
+                <div class="mb-3">
+                    <label class="form-label">Sort by</label>
+                    <select class="form-select" name="sort">
+                        <option>default</option>
+                        @foreach($sortSelect as $value => $name)
+                        <option value="{{$value}}" @if($sortShow==$value) selected @endif>{{$name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            {{-- PER PAGE PAGINATOR --}}
+            {{-- Arba cia per page arba paginate --}}
+            <div class="col-1">
+                <div class="mb-3">
+                    <label class="form-label">Per page</label>
+                    <select class="form-select" name="per_page">
+                        @foreach($perPageSelect as $value)
+                        <option value="{{$value}}" @if($perPageShow==$value) selected @endif>{{$value}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+
+            {{-- SELECT COUNTRY --}}
+            {{-- Arba cia select country arba categories blade --}}
+            <div class="col-2">
+                <div class="mb-3">
+                    <label class="form-label">Select Country</label>
+                    <select class="form-select" name="country_id">
+                        <option value="all">All</option>
+                        @foreach($countries as $country)
+                        <option value="{{$country->id}}" @if($country->id == $countryShow) selected @endif>{{$country->title}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+
+            {{-- BUTTONS SHOW & RESET --}}
+            <div class="col-2 ">
+                <div class=" head-buttons">
+                    <button type="submit" class="btn btn-outline-success" style="margin-right: 5px; margin-top: 30px">Show</button>
+                    <a href="{{route('hotels-index')}}" class="btn btn-outline-success" style="margin-top: 30px">Reset</a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -51,6 +132,13 @@
                 </div>
             </div>
         </div>
+
+        {{-- PER PAGE PAGINATOR LINKS --}}
+        @if($perPageShow != 'all')
+        <div class="m-2">{{ $hotels->links()}}
+        </div>
+        @endif
+
     </div>
 </div>
 @endsection
