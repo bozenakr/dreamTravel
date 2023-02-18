@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
             $table->string('title', 100);
-            $table->decimal('price', 10, 2)->unsigned();
+            $table->decimal('price', 10, 2)->unsigned()->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
             $table->integer('nights')->unsigned()->nullable();

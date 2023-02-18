@@ -47,6 +47,7 @@ class OrderShipped extends Mailable
             markdown: 'emails.shipped',
             with: [
                 'ID' => $this->order->id,
+                'name' =>$this->order->user->name,
             ],
         );
     }

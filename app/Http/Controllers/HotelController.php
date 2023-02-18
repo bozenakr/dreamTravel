@@ -106,7 +106,7 @@ class HotelController extends Controller
         // dd($a);
         
         if (($x > $a) || ($y < $b)) {
-            return redirect()->back()->with('no', 'Out of season! Pick date from ' . $x . ' to ' . $y);
+            return redirect()->back()->with('no', 'Out of season! In ' . ' ' . $hotel->hotelCountry->title . ' pick date from ' . $x . ' to ' . $y);
         }
         else {
         $hotel->save();
@@ -223,7 +223,7 @@ class HotelController extends Controller
         // dd($a);
         
         if (($x > $a) || ($y < $b)) {
-            return redirect()->back()->with('no', 'Out of season! Pick date from ' . $x . ' to ' . $y);
+            return redirect()->back()->with('no', 'Out of season! In ' . ' ' . $hotel->hotelCountry->title . ' pick date from ' . $x . ' to ' . $y);
         }
         else {
         $hotel->save();

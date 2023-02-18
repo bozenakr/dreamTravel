@@ -100,21 +100,25 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                                {{-- Front office --}}
+                                <a class="dropdown-item" href="{{ route('start') }}">Front office</a>
 
-        <main class="py-4" style="margin-top:50px">
-            @include('layouts.messages')
-            @yield('content')
-        </main>
+                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                </div>
+                </li>
+                @endguest
+                </ul>
+            </div>
+    </div>
+    </nav>
+
+    <main class="py-4" style="margin-top:50px">
+        @include('layouts.messages')
+        @yield('content')
+    </main>
     </div>
 </body>
 </html>

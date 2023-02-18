@@ -23,9 +23,9 @@
                                     <div class="m-2">{{$hotel->hotelCountry->title}}</div>
                                     <div class="m-2">{{$hotel->startNice}}</div>
                                     <div class="m-2">{{$hotel->endNice}}</div>
-                                    <div class="m-2">{{$hotel->nights}}
+                                    <div class="m-2">{{$hotel->nights}} nights
                                     </div>
-                                    <div class="m-2">{{$hotel->price}}</div>
+                                    <div class="m-2">{{$hotel->price}} EUR</div>
                                 </div>
                                 <div>
                                     <div class="d-flex">

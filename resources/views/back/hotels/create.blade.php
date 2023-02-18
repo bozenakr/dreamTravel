@@ -31,7 +31,7 @@
                         {{-- DATES --}}
                         <div class="mb-3">
                             <label class="form-label">Check-in</label>
-                            <input type="date" name="hotel_start" class="form-control" min="" value="">
+                            <input type="date" name="hotel_start" class="form-control" min="" value="{{old('hotel_start')}}">
                         </div>
 
                         <div class="mb-3">

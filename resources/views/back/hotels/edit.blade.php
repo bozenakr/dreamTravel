@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@section('title', 'Edit hotel')
+@section('title', 'Hotel Update')
 
 
 <div class="container">
@@ -9,7 +9,7 @@
         <div class="col-12">
             <div class="card m-6">
                 <div class="card-header">
-                    <h2 style="justify-content: center; display: flex">Update hotel Information</h2>
+                    <h2 style="justify-content: center; display: flex">Update Hotel Information</h2>
                 </div>
                 <div class="card-body">
                     <form action="{{route('hotels-update', $hotel)}}" method="post" enctype="multipart/form-data">
@@ -23,17 +23,18 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Hotel name</label>
-                            <input type="text" name="hotel_title" class="form-control" value="{{$hotel->title}}">
+                            <input type="text" name="hotel_title" class="form-control" value="{{ old('hotel_title', $hotel->title) }}">
+
                         </div>
 
                         {{-- CARBON DATES --}}
                         <div class="mb-3">
                             <label class="form-label">Check-in</label>
-                            <input type="date" name="hotel_start" class="form-control" value="{{old('hotel_start')}}">
+                            <input type="date" name="hotel_start" class="form-control" value="{{ old('hotel_start', $hotel->start) }}">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Check-out</label>
-                            <input type="date" name="hotel_end" class="form-control" value="{{old('hotel_end')}}">
+                            <input type="date" name="hotel_end" class="form-control" value="{{ old('hotel_start', $hotel->end) }}">
                         </div>
 
                         {{-- <div class="mb-3">
@@ -43,7 +44,8 @@
 
                 <div class="mb-3">
                     <label class="form-label">Price</label>
-                    <input type="text" name="hotel_price" class="form-control" value="{{$hotel->price}}">
+                    <input type="text" name="hotel_price" class="form-control" value="{{ old('hotel_price', $hotel->price) }}">
+
                 </div>
                 <div class="col-3">
                     <div class="mb-3">

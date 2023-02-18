@@ -69,7 +69,7 @@
                                 @forelse($cart->list as $product)
                                 <div class="dropdown-item">
                                     {{$product->title}}
-                                    <b>X</b> {{$product->count}}
+                                    <b>x</b> {{$product->count}}
                                     {{$product->sum}} EUR
                                 </div>
                                 @empty
@@ -90,22 +90,28 @@
                                     {{ __('Logout') }}
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                                {{-- Back office --}}
+                                @if(in_array(Auth::user()->role,['admin', 'manager']))
+                                <a class="dropdown-item" href="{{ route('hotels-index') }}">Back office</a>
+                                @endif
                             </div>
-                        </li>
 
-                        @endguest
-
-                    </ul>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                 </div>
+                </li>
+
+                @endguest
+
+                </ul>
             </div>
-        </nav>
-        <main class="py-4">
-            @include('layouts.messages')
-            @yield('content')
-        </main>
+    </div>
+    </nav>
+    <main class="py-4">
+        @include('layouts.messages')
+        @yield('content')
+    </main>
     </div>
     @include('layouts.svg')
 </body>
