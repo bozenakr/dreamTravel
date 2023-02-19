@@ -5,10 +5,11 @@
 
 
 
-{{-- SEARCH --}}
 <form action="{{route('hotels-index')}}" method="get">
     <div class="container">
         <div class="row justify-content-space-between">
+
+            {{-- SEARCH --}}
             <div class="col-2">
                 <div class="mb-3">
                     <label class="form-label">Search</label>
@@ -20,6 +21,7 @@
                     <button type="submit" class="btn btn-outline-success" style="margin-top: 30px">Search</button>
                 </div>
             </div>
+
             {{-- SORT BY --}}
             <div class="col-2">
                 <div class="mb-3">
@@ -32,6 +34,7 @@
                     </select>
                 </div>
             </div>
+
             {{-- PER PAGE PAGINATOR --}}
             {{-- Arba cia per page arba paginate --}}
             <div class="col-2">
@@ -47,7 +50,6 @@
 
             {{-- SELECT COUNTRY --}}
             {{-- Arba cia select country arba categories blade --}}
-
             <div class="col-2">
                 <div class="mb-3">
                     <label class="form-label">Select Country</label>
@@ -62,25 +64,15 @@
 
             {{-- BUTTONS SHOW & RESET --}}
             <div class="col-1">
-                <div class=" head-buttons">
+                <div class="head-buttons d-flex">
                     <button type="submit" class="btn btn-outline-success" style="margin-right: 5px; margin-top: 30px">Show</button>
                     <a href="{{route('hotels-index')}}" class="btn btn-outline-success" style="margin-top: 30px">Reset</a>
-
                 </div>
             </div>
 
 
         </div>
     </div>
-</form>
-
-
-
-
-
-
-</div>
-</div>
 </form>
 
 
@@ -116,7 +108,7 @@
                                         {{-- delete rodomas tik admin --}}
                                         @if(Auth::user()?->role == 'admin')
                                         <form action="{{route('hotels-delete', $hotel)}}" method="post">
-                                            <button hotel="submit" class="btn btn-outline-danger">Delete</button>
+                                            <button hotel="submit" class="btn btn-delete btn-outline-danger">Delete</button>
                                     </div>
                                     @csrf
                                     @method('delete')

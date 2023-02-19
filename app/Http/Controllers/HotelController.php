@@ -23,11 +23,13 @@ class HotelController extends Controller
         $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : '15';
         $hotels = Hotel::orderBy('id', 'desc');
 
-        if (!$request->s) {
+       if (!$request->s) {
             if ($request->country_id && $request->country_id != 'all'){
-                $hotels = $hotels->where('country_id', $request->country_id);
+                $hotels = Hotel::where('country_id', $request->country_id);
             }
-
+            else {
+                $hotels = Hotel::where('id', '>', 0);
+            }
 
             $hotels = match($request->sort ?? '') {
                 'asc_price' => $hotels->orderBy('price'),
@@ -63,7 +65,7 @@ class HotelController extends Controller
         }
 
         $countries = Country::all();
-// dd($sortShow);
+
         return view('back.hotels.index', [
             'hotels' => $hotels,
             'sortSelect' => Hotel::SORT,

@@ -44,20 +44,20 @@ class FrontController extends Controller
                 }
         }
         else {
-        if ($request->s) {
-        $s = explode(' ', $request->s);
+            if ($request->s) {
+            $s = explode(' ', $request->s);
 
-        $hotels = Hotel::where(function($query) use ($s) {
-            foreach ($s as $keyword) {
-                //iesko bent vieno sutampancio
-                // $query->orWhere('title', 'like', '%'.$keyword.'%');
-                //iesko visu sutampanciu
-                $query->Where('title', 'like', '%'.$keyword.'%');
-            }
-        });
+            $hotels = Hotel::where(function($query) use ($s) {
+                foreach ($s as $keyword) {
+                    //iesko bent vieno sutampancio
+                    // $query->orWhere('title', 'like', '%'.$keyword.'%');
+                    //iesko visu sutampanciu
+                    $query->Where('title', 'like', '%'.$keyword.'%');
+                }
+            });
 
         $hotels = $hotels->paginate($perPageShow)->withQueryString();
-}
+    }
         }
 
         $countries = Country::all();
