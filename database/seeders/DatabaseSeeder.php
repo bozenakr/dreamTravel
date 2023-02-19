@@ -43,10 +43,10 @@ class DatabaseSeeder extends Seeder
         
         foreach(range(1, 40) as $i) {
             DB::table('hotels')->insert([
-                'title' => $faker->state. ' ' .$faker->city,
+                'title' => $faker->state. ' ' .$faker->streetSuffix,
                 'price' => rand(1499,9999),
-                // 'start' => '2023-'.rand(1,6).'-'.'1',
-                // 'end' => '2023-'.rand(7,12).'-'.'28',
+                'start' => '2023-'.rand(6,7).'-'.'1',
+                'end' => '2023-'.rand(7,8).'-'.'30',
                 'country_id' => rand(1,10),
                 'desc' => $faker->realText(500, 5),
             ]);  

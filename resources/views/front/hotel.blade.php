@@ -36,9 +36,9 @@
                                     </div>
                                     <div class="buy">
                                         <div class="price"> {{$hotel->price}} EUR</div>
-                                        <form action="{{route('add-to-cart')}}" method="post">
+                                        <form class="buy" action="{{route('add-to-cart')}}" method="post">
+                                            <input class="margin-right" type="number" min="1" name="count" value="1">
                                             <button type="submit" class="btn btn-outline-primary">Add to cart</button>
-                                            <input type="number" min="1" name="count" value="1">
                                             <input type="hidden" name="product" value="{{$hotel->id}}">
                                             @csrf
                                         </form>

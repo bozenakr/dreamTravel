@@ -4,13 +4,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>All countries</h2>
+                    <h2 class="text-center">All countries</h2>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
                         @forelse($categories->get() as $country)
                         <li class="list-group-item">
-                            <div class="list-table cats">
+                            <div class="list-table cats zoom">
                                 <div class="list-table__content">
                                     <a href="{{route('show-categories-hotels', $country)}}">
                                         <h3>

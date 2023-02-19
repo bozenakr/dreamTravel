@@ -19,11 +19,11 @@
     <!-- Scripts -->
     @vite(['resources/sass/front/app.scss', 'resources/js/front/app.js'])
 </head>
-<body style="margin-top:100px">
+<body style="margin-top:100px;">
 
     <div id="app">
-        <nav class="navbar fixed-top navbar-expand-md navbar-light bg-white shadow-sm" style="height:80px; margin-bottom:100px">
 
+        <nav class="navbar fixed-top navbar-expand-md navbar-light shadow-sm" style="height:80px; margin-bottom:100px; background: var(--blue-light-bg)">
 
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -80,20 +80,22 @@
 
                         {{-- Logged user --}}
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" style="margin-top:8px" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
 
                                 {{-- Back office --}}
                                 @if(in_array(Auth::user()->role,['admin', 'manager']))
                                 <a class="dropdown-item" href="{{ route('hotels-index') }}">Back office</a>
                                 @endif
+                                {{-- Logout --}}
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
                             </div>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
