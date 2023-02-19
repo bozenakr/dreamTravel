@@ -21,14 +21,13 @@ class HotelController extends Controller
     {
 
         $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : '15';
+        $hotels = Hotel::orderBy('id', 'desc');
 
         if (!$request->s) {
             if ($request->country_id && $request->country_id != 'all'){
-                $hotels = Hotel::where('country_id', $request->country_id);
+                $hotels = $hotels->where('country_id', $request->country_id);
             }
-            else {
-                $hotels = Hotel::where('id', '>', 0);
-            }
+
 
             $hotels = match($request->sort ?? '') {
                 'asc_price' => $hotels->orderBy('price'),
@@ -64,7 +63,7 @@ class HotelController extends Controller
         }
 
         $countries = Country::all();
-
+// dd($sortShow);
         return view('back.hotels.index', [
             'hotels' => $hotels,
             'sortSelect' => Hotel::SORT,
@@ -76,10 +75,6 @@ class HotelController extends Controller
             's' => $request->s ?? ''
         ]);
     }
-
-
-
-
 
 
         // $hotels = Hotel::orderBy('id', 'desc')->get();
@@ -122,7 +117,7 @@ class HotelController extends Controller
         $request->all(),
         [
         //only letters, spaces + lt letters + min 3 letters
-        'hotel_title' => 'required|min:3|regex:/^([a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+){3,}$/',
+        'hotel_title' => 'required|min:3|regex:/^([a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ&\s]+){3,}$/',
         'hotel_price' => 'required|regex:/^[1-9]\d*(\.\d{1,2})?$/',
 
         ],
@@ -243,7 +238,7 @@ class HotelController extends Controller
         $request->all(),
         [
         //only letters, spaces + lt letters + min 3 letters
-        'hotel_title' => 'required|min:3|regex:/^([a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ\s]+){3,}$/',
+        'hotel_title' => 'required|min:3|regex:/^([a-zA-ZąčęėįšųūžĄČĘĖĮŠŲŪŽ&\s]+){3,}$/',
         'hotel_price' => 'required|regex:/^[1-9]\d*(\.\d{1,2})?$/',
 
         ],
