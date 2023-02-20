@@ -21,7 +21,8 @@ class HotelController extends Controller
     {
 
         $perPageShow = in_array($request->per_page, Hotel::PER_PAGE) ? $request->per_page : '15';
-        $hotels = Hotel::orderBy('id', 'desc');
+        // $hotels = Hotel::all()->orderBy('id', 'desc');
+     
 
        if (!$request->s) {
             if ($request->country_id && $request->country_id != 'all'){
@@ -36,7 +37,7 @@ class HotelController extends Controller
                 'desc_price' => $hotels->orderBy('price', 'desc'),
                 default => $hotels
             };
-
+            
             if ($perPageShow == 'all'){
                 $hotels = $hotels->get();
             } else {
@@ -46,7 +47,7 @@ class HotelController extends Controller
         else {
             if ($request->s) {
                 $s = explode(' ', $request->s);
-
+                
                 $hotels = Hotel::where(function($query) use ($s) {
                     foreach ($s as $keyword) {
                         //iesko bent vieno sutampancio
@@ -55,7 +56,7 @@ class HotelController extends Controller
                         $query->Where('title', 'like', '%'.$keyword.'%');
                     }
                 });
-
+                
                 if ($perPageShow == 'all'){
                     $hotels = $hotels->get();
                 } else {
@@ -63,7 +64,9 @@ class HotelController extends Controller
                 }
             }
         }
-
+        
+        // $hotels = Hotel::orderBy('id', 'desc')->get();
+        // $countries = Country::orderBy('id', 'desc')->get();
         $countries = Country::all();
 
         return view('back.hotels.index', [
@@ -99,7 +102,7 @@ class HotelController extends Controller
      */
     public function create()
     {
-        $countries = Country::all()->sortBy('country');
+        $countries = Country::all();
         return view('back.hotels.create', [
             'countries' => $countries
         ]);
@@ -219,7 +222,7 @@ class HotelController extends Controller
      */
     public function edit(Hotel $hotel)
     {
-        $countries = Country::all()->sortBy('title');
+        $countries = Country::all();
         return view('back.hotels.edit', [
             'hotel' => $hotel,
             'countries' => $countries

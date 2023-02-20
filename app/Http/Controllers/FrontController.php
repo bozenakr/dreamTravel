@@ -60,7 +60,7 @@ class FrontController extends Controller
     }
         }
 
-        $countries = Country::all();
+        $countries = Country::orderBy('title')->get();
 
         return view('front.home', [
             'hotels' => $hotels,
@@ -101,7 +101,7 @@ class FrontController extends Controller
 
         }
 
-    $countries = Country::all();
+        $countries = Country::orderBy('title')->get();
 
     return view('front.home', [
         'hotels' => $hotels,

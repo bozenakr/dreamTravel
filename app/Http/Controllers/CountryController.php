@@ -17,6 +17,7 @@ class CountryController extends Controller
     {
         // $countries = Country::all()->sortBy('title');
         $countries = Country::orderBy('id', 'desc')->get();
+        // $countries = Country::orderBy('title')->get();
         return view('back.countries.index', [
             'countries' => $countries
         ]);
