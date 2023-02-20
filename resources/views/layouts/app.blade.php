@@ -117,10 +117,12 @@
     </div>
     </nav>
 
-    <main class="py-4" style="margin-top:50px">
-        @include('layouts.messages')
-        @yield('content')
-    </main>
+    <div class="container" style="margin-top:20px">
+        <main class="py-4" style="margin-top:80px">
+            @include('layouts.messages')
+            @yield('content')
+        </main>
+    </div>
     </div>
 </body>
 </html>

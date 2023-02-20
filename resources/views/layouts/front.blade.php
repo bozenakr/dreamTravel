@@ -103,15 +103,13 @@
                             </form>
                 </div>
                 </li>
-
                 @endguest
-
                 </ul>
             </div>
     </div>
     </nav>
     <main class="py-4" style="margin-top:50px">
-        @include('layouts.messages')
+        <div class="container">@include('layouts.messages')</div>
         @yield('content')
     </main>
     </div>

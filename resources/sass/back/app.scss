@@ -23,16 +23,17 @@
 }
 
 :root {
+    --primary-green: #007589;
+    --primary-blue: #3eb2fd;
+    --primary-teal: #13a6bc;
     --blue-bg: #b3ecfc;
     --blue-light-bg: #dbf6fd;
     --black: #10162b;
     --white: #ffffff;
     --blue-dark-btn: #144975;
     --grey-btn: #8fc3d4;
-    --blue-logout: #007fb6;
     --red: rgb(223, 117, 84);
 }
-
 
 body,
 body * {
@@ -49,11 +50,18 @@ body {
     background-color: var(--blue-light-bg);
 }
 
-.main-title {
-    font-size: 40px;
-    text-align: center;
-    margin-bottom: 40px;
-    color: var(--black);
+ .margin-right {
+     margin-right: 10px;
+ }
+
+.pagination .page-item.active .page-link {
+    background-color: var(--primary-teal);
+    color: white;
+    border: 1px solid var(--grey-btn);
+}
+
+.pagination .page-item:not(.active) .page-link {
+    color: rgb(52, 52, 52);
 }
 
 .text-center {
@@ -72,14 +80,6 @@ body {
     margin-left: calc((100% - 80%) / 2);
 }
 
-/* BG img*/
-.bg {
-    background: url('../img/bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
 
 /* HEADER start */
 
@@ -95,7 +95,7 @@ header {
 }
 
 .logo {
-    height: 70px;
+    height: 80px;
     width: auto;
 }
 

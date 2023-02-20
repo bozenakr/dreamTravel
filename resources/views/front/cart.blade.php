@@ -33,8 +33,6 @@
                                             <input type="hidden" name="ids[]" value="{{$hotel->id}}">
                                         </div>
                                         <div class="price"> {{$hotel->sum}} EUR</div>
-
-
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <button type="submit" name="delete" value="{{$hotel->id}}" class="btn btn-delete">Delete</button>
@@ -45,7 +43,8 @@
                             <li class="list-group-item">Cart Empty</li>
                             @endforelse
                             <li class="d-flex justify-content-end">
-                                <button type="submit" class="btn margin-right">Update cart</button>
+                                <button type="submit" class="btn" style="margin:10px">Update cart</button>
+
                             </li>
                         </ul>
                         @csrf
@@ -53,10 +52,7 @@
 
                     {{-- Make order BUY--}}
                     <form action="{{route('make-order')}}" method="post" class="d-flex justify-content-end">
-
-                        <button type="submit" class="btn">Buy</button>
-
-
+                        <button type="submit" class="btn btn-buy">Buy</button>
                         @csrf
                     </form>
                 </div>

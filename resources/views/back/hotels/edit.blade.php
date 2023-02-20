@@ -63,7 +63,7 @@
 
                 </div>
                 @if($hotel->photo)
-                <button type="submit" class="btn btn-outline-warning mt-4" name="delete_photo" value="1">Delete Photo</button>
+                <button type="submit" class="btn btn-outline-warning mt-2 mb-4" name="delete_photo" value="1">Delete Photo</button>
                 @endif
 
                 <div class="col-12">

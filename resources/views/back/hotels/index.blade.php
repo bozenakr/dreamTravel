@@ -5,7 +5,7 @@
 
 
 
-<form action="{{route('hotels-index')}}" method="get">
+<form action="{{route('hotels-index')}}" method="get" style="margin: 20px 0 20px 0">
     <div class="container">
         <div class="row justify-content-space-between">
 
@@ -91,24 +91,31 @@
                                 <div class="d-flex">
                                     @if($hotel->photo)
                                     <img class="small-img" src="{{asset($hotel->photo)}}">
+                                    @else
+                                    <img class="small-img" src="{{asset('no-img-2.png')}}">
                                     @endif
-                                    <h5 class="m-2">{{$hotel->title}}</h5>
-                                    <div class="m-2">{{$hotel->hotelCountry->title}}</div>
+                                    <h5 class="m-2 col-2">{{$hotel->title}}</h5>
+
+                                    <div class="m-2 col-2">{{$hotel->hotelCountry->title}}</div>
+
                                     <div class="m-2">{{$hotel->start}}</div>
                                     <div class="m-2">{{$hotel->end}}</div>
-                                    <div class="m-2">{{$hotel->nights}} nights
+                                    <div class="m-2 col-1">{{$hotel->nights}} nights
+
                                     </div>
                                     <div class="m-2">{{$hotel->price}} EUR</div>
                                 </div>
                                 <div>
                                     <div class="d-flex">
-                                        <a href="{{route('hotels-show', $hotel)}}" class="btn btn-outline-success">Show</a>
-                                        <a href="{{route('hotels-edit', $hotel)}}" class="btn btn-outline-success">Edit</a>
+                                        <a href="{{route('hotels-show', $hotel)}}" class="btn margin-right">Show</a>
+
+                                        <a href="{{route('hotels-edit', $hotel)}}" class="btn margin-right">Edit</a>
+
 
                                         {{-- delete rodomas tik admin --}}
                                         @if(Auth::user()?->role == 'admin')
                                         <form action="{{route('hotels-delete', $hotel)}}" method="post">
-                                            <button hotel="submit" class="btn btn-delete btn-outline-danger">Delete</button>
+                                            <button hotel="submit" class="btn btn-delete">Delete</button>
                                     </div>
                                     @csrf
                                     @method('delete')
