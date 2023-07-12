@@ -1,0 +1,31 @@
+{
+  "_axios-59ec61a6.js": {
+    "file": "assets/axios-59ec61a6.js"
+  },
+  "resources/js/back/app.js": {
+    "file": "assets/app-e8609461.js",
+    "imports": [
+      "_axios-59ec61a6.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/back/app.js"
+  },
+  "resources/js/front/app.js": {
+    "file": "assets/app-0d4910c7.js",
+    "imports": [
+      "_axios-59ec61a6.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/front/app.js"
+  },
+  "resources/sass/back/app.scss": {
+    "file": "assets/app-80c6ce13.css",
+    "isEntry": true,
+    "src": "resources/sass/back/app.scss"
+  },
+  "resources/sass/front/app.scss": {
+    "file": "assets/app-cf20c063.css",
+    "isEntry": true,
+    "src": "resources/sass/front/app.scss"
+  }
+}
